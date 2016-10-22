@@ -1,0 +1,227 @@
+import astropy.units as u
+import astropy.coordinates as coord
+import numpy as np
+import os
+import sys
+import matplotlib.pyplot as plt
+import math as math
+import pylab as p
+
+#symbol = [u'\u2193']
+
+d1 = np.array([1.9999985,1.7975231,1.6471257,1.3073407,2.1646161,2.2035128,1.8080417,2.3435479,2.1755359,1.9794072,1.3936864,1.5371942,2.3067399,1.8127967,1.9184465,1.5089274,1.9221068,2.8495997,2.3913758,2.2542388,2.9467556,2.0607902,1.47712125,1.7708520,2.2671717,1.8808135,2.041392,2.4297523,2.3404441,1.6232493,2.0492180,2.2227,2.230448,2.43136,1.653212])
+
+hi1 = np.array([0.005e6,1.8e3,968,265,9.8e3,1.8e4,1.8e3,1.2e5,5.6e4,2.5e4,2.3e3,9e3,0.02e6,0.011e6,0.017e6,0.0003e6,0.004e6,0.29e6,0.03e6,1.6e4,0.39e6,0.005e6,1.6e6,1.4e6,1.1e6,1.4e6,1.5e6,0.3e6,1.5e6,1.5e6,1.5e6,1.4e6,1e6,0.7e6,1.6e6])
+
+m1 = np.array([13,1e100,1.2,1e100,7.1,1.4,1e100,27,2.4,15,4.9,1e100,9.7,23,22,1e100,19,1e100,22,1e100,1e100,110,2120,1e100,1e100,1e100,1e100,1e100,1e100,1e100,1e100,1e100,1e100,1e100,1e100])
+
+l1 = np.array([-9.3,-5.8,-3.7,-3.0,-6.0,-5.1,-3.1,-7.9,-4.8,-5.6,-3.8,-2.5,-9.6,-8.9,-8.8,-13.4,-9.5,-10.1,-11.9,-4.3,-9.6,-15.5,-16.7,-11.9,-11.1,-10.3,-9.1,-11.3,-12.0,-8.3,-8.1,1E100,-9.4,-9.2,-8.5])
+
+d2 = np.array([2.6485538,3.0913448,2.9065197,2.4461155,2.6180653,2.7252459,2.8847902,2.2677388,1.5016764,3.1139433,2.8357365,3.1275412,3.1583624,3.2017436,3.0284159,3.2028265,3.1214765,2.9666963,2.8476821])
+
+hi2 = np.array([0.17e6,0.72e6,1.9e6,0.16e6,4.3e5,3.4e6,153e6,0.13e6,0.38e6,16e6,8e6,45e6,78e6,4.5e6,8.8e6,67e6,6.2e6,61e6,54e6])
+
+l2 = np.array([-10.1,-10.8,-10.0,-10.5,-7.1,-12.9,-15.7,-15.5,-16.6,-12.6,-11.4,-14.2,-14.2,-11.8,-12.6,-14.8,1E100,-14.5,-14.7])
+
+m2 = np.array([33,12,5.4,13,8.2,58,1580,130,740,1e100,80,885,395,7.6,9.6,400,1e100,150,795])
+
+d3 = np.array([1.9444826,2.1398790])
+
+hi3 = np.array([0.234e6,0.15e6])
+
+#d3 = np.array([1.9017650,2.1364028])
+
+m3 = np.array([6.4,68])
+
+l3 = np.array([-11.1,-13.2])
+
+#label1 = np.array(['Carina','Bootes 1','Coma Berenices','Segue 1','Hercules','Leo 4','Bootes 2','Canis Venetici 1','Canis Venetici II','Ursa Major I','Ursa Major II','Willman 1','Leo II','Ursa Minor','Draco','Sagittarius','Sextans','Cetus','Leo 1','Leo V','Tucana','NGC 147','M32','Andromeda I','Andromeda II','Andromeda III','Andromeda IV','Andromeda VI','Andromeda VII','and9','and10','and14','and15','and16','and17','cari','boo1','coma','segu','herc','leo4','boo2','CV1','CV2','UM1','UM2','Wil1','LeoII','Uminor','Draco','Sagit','sext','cetu','leo1','leoV','tuca','NGC147','M32','and1','and2','and3','and5','and6','and7','and9','and10','and14','and15','and16','and17'])
+
+#label2 = np.array(['Phoenix','Antlia','Aquarius/DDO210','Pisces/LGS3','Leo T','Pegasus DIG','IC 10','NGC 185','NGC 205','EGB 0427/UGCA 092','Leo A','Sextans B','Sextans A','GR 8','Sagittarius DIG','IC 5152','UGCA 438','WLM','IC 1613'])
+
+#label3 = np.array(['Sculptor','Fornax'])
+
+label1 = np.array(['Car','Boo1','Coma','Seg1','Herc','LeoIV','Boo2','CVnI','CVnII','UMaI','UMaII','Wil1','LeoII','UMi','Dra','Sag','Sex','Cet','Leo1','LeoV','Tuc','NGC147','M32','AI','AII','AIII','AV','AVI','AVII','AIX','AX','AXV','AXVI','AXVII'])
+
+label2 = np.array(['Phoe','Ant','DDO210','LGS3','LeoT','PegDIG','IC10','NGC185','NGC205','UGCA092','LeoA','SextB','SextA','GR8','SagDIG','IC5152','UGCA438','WLM','IC1613'])
+
+label3 = np.array(['Scul','Forn'])
+
+
+#class Galaxy:
+#	"""A galaxy which has the following properties:
+#
+#	Attributes:
+#		name:
+#		ra
+#		dec
+#		distance
+#		HImass
+#		"""
+#	def __init__(self, name, ra, dec, distance, HImass):
+#		self.name = name
+#		self.ra = ra
+#		self.dec = dec
+#		self.distance = distance
+#		self.HImass = HImass
+#		#self.HImasslimit = 
+#		#self.MWdistance = c.transform_to(coord.Galactocentric)
+#		#self.m31distance = coord.coordsystems.SphericalCoordinatesBase.separation_3d()
+#	#def plotDistanceHI(self):
+#        #f = plt.figure()
+#        #sp = f.add_subplot(111)
+#        #sp.plot(self.distance, self.HImass, 'o-')
+#        #return f
+
+
+#wlm=Galaxy('WLM',(0,01,58),(-15,27,48),925,6.1e7)
+#ic10 = Galaxy('IC 10',(0,20,25),(59,17,30),825,1.53e8)
+#cetus = Galaxy('Cetus',(0,26,11),(-11,02,40),755,0.29)
+#smc = Galaxy('Small Magellanic Cloud',(00,52,44),(-72,49,42),60,4.02e8)
+#sculptor = Galaxy('Sculptor',(1,0,9),(-33,42,33),810,2.34e5)
+
+#
+#Plot D vs. HI
+
+loghi1 = np.log10(hi1)
+loghi2 = np.log10(hi2)
+loghi3 = np.log10(hi3)
+
+#plt.scatter(d1,loghi1,marker="1")
+
+#plt.scatter(d2,loghi2,marker="o",color='blue')
+plt.scatter(d2,loghi2,facecolors='none')
+plt.scatter(d3,loghi3,marker="x")
+for i in range(0,d1.size):
+	plt.arrow(d1[i], loghi1[i], 0.0, -0.05, fc="k", ec="k", head_width=0.01, head_length=0.03)
+#plt.scatter(d2,loghi2,'bo')
+#plt.scatter(d3,loghi3,'go')
+plt.xlabel('log(D/kpc)')
+plt.ylabel('log(M$_{HI}$/M$_{solar}$)')
+#plt.title('Distance vs HI mass')
+plt.axis([1,3.5,3,8.5])
+#plt.grid(True)
+print d1.size, d2.size, d3.size
+
+#for i  in range(0,d1.size):
+#	print label1[i]
+#	print d1[i]
+#	print loghi1[i]
+
+#for x, y in zip(d1,loghi1):
+#        plt.text(x, y, symbol, fontname='STIXGeneral', size=30, va='center', ha='center', clip_on=True)
+
+for i  in range(0,d1.size):
+	#plt.errorbar(d1[i], loghi1[i], yerr=[0.00001],uplims = True)
+	if label1[i] == 'AIX':
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-10,1),fontsize=6,textcoords='offset points')
+	elif label1[i] == 'AX':
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-5,8),fontsize=6,textcoords='offset points')
+	elif label1[i] == 'AXV':
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-14,-2),fontsize=6,textcoords='offset points')
+	elif label1[i] == 'LeoIV':
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-12,2),fontsize=6,textcoords='offset points')
+	elif label1[i] == 'LeoII':
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-4,5),fontsize=6,textcoords='offset points')
+	elif label1[i] == 'Boo1':
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-5,8),fontsize=6,textcoords='offset points')
+	else:
+		plt.annotate(label1[i],xy=(d1[i],loghi1[i]), xytext=(-5,2),fontsize=6,textcoords='offset points')
+for i  in range(0,d2.size):
+	if label2[i] == 'NGC185':
+		plt.annotate(label2[i],xy=(d2[i],loghi2[i]), xytext=(-7,5),fontsize=6,textcoords='offset points')
+	elif label2[i] == 'SextA':
+		plt.annotate(label2[i],xy=(d2[i],loghi2[i]), xytext=(-7,5),fontsize=6,textcoords='offset points')
+	else:
+		plt.annotate(label2[i],xy=(d2[i],loghi2[i]), xytext=(-5,4),fontsize=6,textcoords='offset points')
+for i  in range(0,d3.size):
+	plt.annotate(label3[i],xy=(d3[i],loghi3[i]), xytext=(-5,4),fontsize=6,textcoords='offset points')
+plt.savefig("HIvsD.png")
+#plt.figure(0)
+plt.show()
+
+loghidivm1 = np.log10((hi1)/(m1*1e6))
+loghidivm2 = np.log10((hi2)/(m2*1e6))
+loghidivm3 = np.log10((hi3)/(m3*1e6))
+
+#plt.scatter(d1,loghidivm1,marker="1")
+plt.scatter(d2,loghidivm2,marker="o")
+plt.scatter(d3,loghidivm3,marker="x")
+for i in range(0,d1.size):
+	plt.arrow(d1[i], loghidivm1[i], 0.0, -0.05, fc="k", ec="k", head_width=0.01, head_length=0.03)
+#plt.scatter(d2,loghi2,'bo')
+#plt.scatter(d3,loghi3,'go')
+plt.ylim(-5, 1)
+plt.xlabel('Log(Distance to M31 or MW, whichever is closer [Kpc])')
+plt.ylabel('Log(HI Fraction)')
+plt.title('Distance vs HI Mass Fraction')
+#plt.grid(True)
+for i  in range(0,d1.size):
+	plt.annotate(label1[i],xy=(d1[i],loghidivm1[i]), xytext=(3,3),fontsize=7,textcoords='offset points')
+for i  in range(0,d2.size):
+	plt.annotate(label2[i],xy=(d2[i],loghidivm2[i]), xytext=(3,3),fontsize=7,textcoords='offset points')
+for i  in range(0,d3.size):
+	plt.annotate(label3[i],xy=(d3[i],loghidivm3[i]), xytext=(3,3),fontsize=7,textcoords='offset points')
+plt.savefig("HIvsDMassFrac.png")
+#plt.figure(1)
+plt.show()
+
+
+#Luminosity normalized plot
+
+lum1 = 10**((l1-4.77)/(-2.5))
+lum2 = 10**((l2-4.77)/(-2.5))
+lum3 = 10**((l3-4.77)/(-2.5))
+
+#Test where lum = 0
+#print np.where(lum1 == 0).size,np.where(lum2 == 0).size, np.where(lum3 == 0).size
+
+d1 = d1[np.where(lum1 != 0)]
+d2 = d2[np.where(lum2 != 0)]
+d3 = d3[np.where(lum3 != 0)]
+
+loghidivl1 = np.log10((hi1[np.where(lum1 != 0)])/(lum1[np.where(lum1 !=0)]))
+loghidivl2 = np.log10((hi2[np.where(lum2 != 0)])/(lum2[np.where(lum2 !=0)]))
+loghidivl3 = np.log10((hi3[np.where(lum3 != 0)])/(lum3[np.where(lum3 !=0)]))
+
+#plt.scatter(d1,loghidivl1,marker="1")
+plt.scatter(d2,loghidivl2,marker="o")
+plt.scatter(d3,loghidivl3,marker="x")
+for i in range(0,d1.size):
+	plt.arrow(d1[i], loghidivl1[i], 0.0, -0.05, fc="k", ec="k", head_width=0.01, head_length=0.03)
+#plt.scatter(d2,loghi2,'bo')
+#plt.scatter(d3,loghi3,'go')
+#plt.ylim(-5, 1)
+plt.xlabel('Log(Distance to M31 or MW, whichever is closer [Kpc])')
+plt.ylabel('Log(HI mass divided by luminosity)')
+plt.title('Distance vs HI Mass/Luminosity ')
+#plt.grid(True)
+
+label1 = label1[np.where(lum1 != 0)]
+label2 = label2[np.where(lum2 != 0)]
+label3 = label3[np.where(lum3 != 0)]
+
+for i  in range(0,d1.size):
+	plt.annotate(label1[i],xy=(d1[i],loghidivl1[i]), xytext=(3,3),fontsize=7,textcoords='offset points')
+for i  in range(0,d2.size):
+	plt.annotate(label2[i],xy=(d2[i],loghidivl2[i]), xytext=(3,3),fontsize=7,textcoords='offset points')
+for i  in range(0,d3.size):
+	plt.annotate(label3[i],xy=(d3[i],loghidivl3[i]), xytext=(3,3),fontsize=7,textcoords='offset points')
+plt.savefig("HIvsDNormLum.png")
+#plt.figure(2)
+plt.show()
+
+
+
+
+#Find distance to Milky Way
+
+#c = coord.ICRS(ra=[158.3122, 24.5] * u.degree, dec=[-17.3, 81.52] * u.degree, distance=[11.5, 24.12] * u.kpc)
+#distancetoMW = 
+
+#Find distance to m31
+#distancetoM31 = 
+
+# = min[distancetoMW,distancetoM31]
+
+
