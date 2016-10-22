@@ -1,2 +1,2 @@
 # dwarf
-Dwarf Galaxy 
+Dwarf galaxy analysis code
